@@ -40,10 +40,11 @@ const trackerc721 = async () => {
     console.log(error)
   }
 }
-const trackAll721s = async () => {
+const trackAll721s = async (onSuccess) => {
   const func = async () => {
     try {
       await trackerc721()
+      onSuccess();
       setTimeout(async () => {
         await func()
       }, 1000 * 60 * 10)
