@@ -85,7 +85,7 @@ affinity: {}
 
 envFrom:
   - secretRef:
-      name: promenade-erc721-transfer-tracker
+      name: promenade-erc721-transfer-tracker-secret
   - secretRef:
       name: promenade-shared-secret
   - configMapRef:
