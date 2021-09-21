@@ -2,13 +2,17 @@ require('dotenv').config()
 const axios = require('axios')
 const contractutils = require('./contract.utils')
 
-const apiEndPoint = process.env.API_ENDPOINT
+const apiEndPoint = process.env.API_ENDPOINT  
+const PROMENADE_API_SECRET = process.env.PROMENADE_API_SECRET;
 
 const callAPI = async (endpoint, data) => {
   console.log(data)
   await axios({
     method: 'post',
     url: apiEndPoint + endpoint,
+    headers: {
+      'x-promenade-api-secret': PROMENADE_API_SECRET 
+    },
     data,
   })
 }
@@ -18,7 +22,11 @@ const trackedContracts = []
 
 const trackerc721 = async () => {
   try {
-    let response = await axios.get(`${apiEndPoint}getTrackable721Contracts`)
+    let response = await axios.get(`${apiEndPoint}getTrackable721Contracts`, {
+      headers: {
+        'x-promenade-api-secret': PROMENADE_API_SECRET 
+      }
+    })
     if (response) {
       let data = response.data
       if (data.status == 'success') {
